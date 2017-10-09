@@ -1,0 +1,19 @@
+{
+  "name": "atom-elixir-formatter",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Atom package to format Elixir source code.",
+  "keywords": ["elixir", "formatter"],
+  "activationCommands": {
+    "atom-workspace": "atom-elixir-formatter:format"
+  },
+  "activationHooks": ["language-elixir:grammar-used"],
+  "repository": "https://github.com/rgreenjr/atom-elixir-formatter",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "tmp": "0.0.33"
+  }
+}

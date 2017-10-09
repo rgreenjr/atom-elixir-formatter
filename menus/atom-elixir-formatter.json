@@ -1,0 +1,18 @@
+{
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Elixir Formatter",
+          "submenu": [
+            {
+              "label": "Format File",
+              "command": "atom-elixir-formatter:format"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

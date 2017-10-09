@@ -1,0 +1,5 @@
+{
+  "atom-text-editor": {
+    "ctrl-alt-f": "atom-elixir-formatter:format"
+  }
+}
