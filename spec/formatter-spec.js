@@ -101,23 +101,25 @@ describe("Formatter", () => {
     });
 
     it("uses project path when mixDirectory setting undefined", () => {
+      let editor = atom.workspace.getActiveTextEditor();
       atom.config.set("atom-elixir-formatter.mixDirectory", undefined);
 
       formatter.runFormat("input text");
-      expect(process.spawnSync).toHaveBeenCalledWith("mix", [
-        "format",
-        "/tmp/file"
-      ]);
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix", ["format", "/tmp/file"], {}
+      );
     });
 
     it("uses mixDirectory setting when defined", () => {
+      let editor = atom.workspace.getActiveTextEditor();
       atom.config.set("atom-elixir-formatter.mixDirectory", "/tmp");
 
-      formatter.runFormat("input text");
-      expect(process.spawnSync).toHaveBeenCalledWith("mix", [
-        "format",
-        "/tmp/file"
-      ]);
+      formatter.runFormat(editor, "input text");
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix",
+        ["format", "/tmp/file"],
+        {cwd: path.join(__dirname, "fixtures")}
+      );
     });
   });
 });
