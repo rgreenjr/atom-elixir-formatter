@@ -1,8 +1,8 @@
-# atom-elixir-formatter package
-
-![header](header.png)
+# Atom Elixir Formatter
 
 [![Build Status](https://travis-ci.org/rgreenjr/atom-elixir-formatter.svg?branch=master)](https://travis-ci.org/rgreenjr/atom-elixir-formatter) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+
+![header](header.png)
 
 An Atom package to format Elixir source code.
 
