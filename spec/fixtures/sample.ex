@@ -1,47 +1,29 @@
 defmodule App do
-  @number 123456789
-  @very_long = %{ foo: "bar", baz: "1", bar: "bar", quux: "bar", banana: "bar", apple: "bar",
-ananas: "bar", morestuff: "bar", katonka: "bar" }
+  defstruct [ :first_name, :middle_name, :last_name, :suffix, :employee_id, admin: false, validated: false ]
 
-  def one() do
-  Enum.map [
-    "one",           <<"two">>,
-    "three"],
-        fn(num)        -> IO.puts   (num)
-    end
+  def sum(range, _opts) do
+        Enum.reduce(
+    range, 0,
+      fn(x), acc
+      -> x + acc end
+    )
   end
 
-  def case_assignment() do
-    result = case some_function() do
-      :ok -> true
-      _ -> false
-    end
+  def pipelines(some_string, lead_padding \\ "+", trail_padding \\ "-") do
+    some_string |> String.downcase() |> String.pad_leading(100, lead_padding) |> String.pad_trailing(100, trail_padding)
   end
 
-  def pipeline_assignment(some_string) do
-    result = some_string |> String.downcase |> String.strip
-  end
-
-  defp valid?(character) when character in ?a..?z when character in ?A..?Z when character in ?0..?9 when character == ?_ do
+  defp complex_guard(operation, args, ref) when is_atom(operation) and operation not in @unary_ops when is_map(args) and map_size(map) > 2 when is_list(ref) or not is_nil(ref) or is_float(args) do
     true
   end
 
-  defp complex_guard(operation, args, ref) when is_atom(operation)
-    and not operation in @unary_ops and not operation in @binary_ops when is_map(args) and map_size(map) > 2 when is_list(ref)
-    or not is_nil(ref) or is_float(args) or is_integer(ref) and rem(ref, 2) == 0 do
-    true
-  end
-
-  # comment
-  def wrong_spacing(options\\[])
-  do
+  def bad_spacing(options \\ []) do
     sum = 1+1
-{a1,a2} = {2 ,3
-}
-Enum.join( [ "one" , << "two" >>, sum ])
-angle = - 45
+{a1,a2} = {2 ,3          }
+angle = -   45
 ^ result = Float.parse("42.01")
   end
 
-  # trailing comment
+  defp do_sum([], total), do: total
+  defp do_sum([head | tail], total), do: do_sum(tail, head + total)
 end
