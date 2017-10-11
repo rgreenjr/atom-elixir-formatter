@@ -42,7 +42,13 @@ describe("Main", () => {
       ).toBe(true);
     });
 
-    it("should default mixExecutable to current directory", () => {
+    it("should default elixirExecutable to 'elixir'", () => {
+      expect(atom.config.get("atom-elixir-formatter.elixirExecutable")).toEqual(
+        "elixir"
+      );
+    });
+
+    it("should default mixExecutable to 'mix'", () => {
       expect(atom.config.get("atom-elixir-formatter.mixExecutable")).toEqual(
         "mix"
       );

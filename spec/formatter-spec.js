@@ -100,14 +100,39 @@ describe("Formatter", () => {
       spyOn(tmp, "tmpNameSync").andReturn("/tmp/file");
     });
 
+    it("uses default elixir when elixirExecutable setting undefined", () => {
+      atom.config.set("atom-elixir-formatter.elixirExecutable", undefined);
+      formatter.runFormat("input text");
+
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "elixir",
+        ["mix", "format", "/tmp/file"],
+        { cwd: main.projectPath() }
+      );
+    });
+
+    it("uses elixirExecutable setting when defined", () => {
+      atom.config.set(
+        "atom-elixir-formatter.elixirExecutable",
+        "/path/to/elixir"
+      );
+      formatter.runFormat("input text");
+
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "/path/to/elixir",
+        ["mix", "format", "/tmp/file"],
+        { cwd: main.projectPath() }
+      );
+    });
+
     it("uses default mix when mixExecutable setting undefined", () => {
       atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "mix",
-        ["format", "/tmp/file"],
-        { cwd: path.join(__dirname, "fixtures") }
+        "elixir",
+        ["mix", "format", "/tmp/file"],
+        { cwd: main.projectPath() }
       );
     });
 
@@ -116,9 +141,9 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "/path/to/mix",
-        ["format", "/tmp/file"],
-        { cwd: path.join(__dirname, "fixtures") }
+        "elixir",
+        ["/path/to/mix", "format", "/tmp/file"],
+        { cwd: main.projectPath() }
       );
     });
 
@@ -126,9 +151,9 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "mix",
-        ["format", "/tmp/file"],
-        { cwd: path.join(__dirname, "fixtures") }
+        "elixir",
+        ["mix", "format", "/tmp/file"],
+        { cwd: main.projectPath() }
       );
     });
 
@@ -137,8 +162,8 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "mix",
-        ["format", "/tmp/file"],
+        "elixir",
+        ["mix", "format", "/tmp/file"],
         {}
       );
     });
