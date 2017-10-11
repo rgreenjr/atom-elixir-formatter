@@ -10,13 +10,21 @@ An Atom package to format Elixir source code.
 
 ## Installation
 
-Note that **atom-elixir-formatter** requires Elixir v1.6.0, which is currently unreleased. You will need to download and compile the master branch of Elixir, then provide the absolute path of its `mix` executable in **Mix Executable** in Settings.
+Note that **atom-elixir-formatter** requires Elixir 1.6, which is currently unreleased. You'll need to download and compile the master branch of Elixir.
 
-Install `atom-elixir-formatter`:
+```sh
+git clone https://github.com/elixir-lang/elixir.git
+cd elixir
+make clean test
+```
+
+Install the **atom-elixir-formatter** package.
 
 ```sh
 apm install atom-elixir-formatter
 ```
+
+From the **atom-elixir-formatter** settings in Atom, set **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
 
 ## Maintainers
 
