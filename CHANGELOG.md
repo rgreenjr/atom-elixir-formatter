@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.5 - 2017-10-11
+
+- Add better installation instructions to README
+
 ## 0.1.4 - 2017-10-11
 
 - Add elixirExecutable setting
