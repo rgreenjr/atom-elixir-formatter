@@ -100,25 +100,46 @@ describe("Formatter", () => {
       spyOn(tmp, "tmpNameSync").andReturn("/tmp/file");
     });
 
-    it("uses project path when mixDirectory setting undefined", () => {
-      let editor = atom.workspace.getActiveTextEditor();
-      atom.config.set("atom-elixir-formatter.mixDirectory", undefined);
-
+    it("uses default mix when mixExecutable setting undefined", () => {
+      atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
       formatter.runFormat("input text");
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "mix", ["format", "/tmp/file"], {}
-      );
-    });
 
-    it("uses mixDirectory setting when defined", () => {
-      let editor = atom.workspace.getActiveTextEditor();
-      atom.config.set("atom-elixir-formatter.mixDirectory", "/tmp");
-
-      formatter.runFormat(editor, "input text");
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
         ["format", "/tmp/file"],
-        {cwd: path.join(__dirname, "fixtures")}
+        { cwd: path.join(__dirname, "fixtures") }
+      );
+    });
+
+    it("uses mixExecutable setting when defined", () => {
+      atom.config.set("atom-elixir-formatter.mixExecutable", "/path/to/mix");
+      formatter.runFormat("input text");
+
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "/path/to/mix",
+        ["format", "/tmp/file"],
+        { cwd: path.join(__dirname, "fixtures") }
+      );
+    });
+
+    it("sets cwd when project path defined", () => {
+      formatter.runFormat("input text");
+
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix",
+        ["format", "/tmp/file"],
+        { cwd: path.join(__dirname, "fixtures") }
+      );
+    });
+
+    it("doesn't set cwd when project path undefined", () => {
+      spyOn(main, "projectPath").andReturn(undefined);
+      formatter.runFormat("input text");
+
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix",
+        ["format", "/tmp/file"],
+        {}
       );
     });
   });
