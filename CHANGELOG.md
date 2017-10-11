@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.3 - 2017-10-11
+
+- Set project path as current working directory when executing 'mix format'
+- Add spec tests
+
 ## 0.1.2 - 2017-10-10
 
 - Add continuous integration support via Travis CI
