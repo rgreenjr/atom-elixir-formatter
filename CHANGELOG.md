@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.4 - 2017-10-11
+
+- Add elixirExecutable setting
+
 ## 0.1.3 - 2017-10-11
 
 - Set project path as current working directory when executing 'mix format'
