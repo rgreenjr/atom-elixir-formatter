@@ -36,7 +36,7 @@ describe("Main", () => {
       expect(atom.config.get("atom-elixir-formatter.formatOnSave")).toBe(true);
     });
 
-    it("should default showErrorNotifications to false", () => {
+    it("should default showErrorNotifications to true", () => {
       expect(
         atom.config.get("atom-elixir-formatter.showErrorNotifications")
       ).toBe(true);
