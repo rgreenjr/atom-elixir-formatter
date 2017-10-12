@@ -5,7 +5,6 @@ import formatter from "../lib/formatter";
 import helper from "./helper";
 import main from "../lib/main";
 import process from "child_process";
-import tmp from "tmp";
 
 const validFile = path.join(__dirname, "fixtures", "valid.ex");
 
@@ -23,7 +22,7 @@ describe("Formatter", () => {
   });
 
   describe("formatTextEditor", () => {
-    it("replaces all text with stdout when text selection is empty", () => {
+    it("formats all text when range parameter not given", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 0,
         stdout: "replacement text",
@@ -32,12 +31,12 @@ describe("Formatter", () => {
 
       const editor = atom.workspace.getActiveTextEditor();
       editor.setText("initial text");
-      formatter.formatTextEditor(editor, editor.getText(), null);
+      formatter.formatTextEditor(editor);
       expect(editor.getText()).toEqual("replacement text");
       expect(atom.notifications.getNotifications().length).toBe(0);
     });
 
-    it("replaces selected text with stdout when text selection exists", () => {
+    it("formats specified text range when range parameter given", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 0,
         stdout: "REPLACEMENT TEXT\n",
@@ -47,11 +46,7 @@ describe("Formatter", () => {
       const editor = atom.workspace.getActiveTextEditor();
       editor.setText("Row1\nRow2\nRow3");
       editor.setSelectedBufferRange([[1, 0], [2, 0]]); // select 2nd row
-      formatter.formatTextEditor(
-        editor,
-        editor.getText(),
-        editor.getSelectedBufferRange()
-      );
+      formatter.formatTextEditor(editor, editor.getSelectedBufferRange());
       expect(editor.getText()).toEqual("Row1\nREPLACEMENT TEXT\nRow3");
       expect(atom.notifications.getNotifications().length).toBe(0);
     });
@@ -101,7 +96,6 @@ describe("Formatter", () => {
   describe("runFormat", () => {
     beforeEach(function() {
       spyOn(process, "spawnSync").andReturn({});
-      spyOn(tmp, "tmpNameSync").andReturn("/tmp/file");
     });
 
     it("uses default elixir when elixirExecutable setting undefined", () => {
@@ -110,8 +104,8 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["mix", "format", "/tmp/file"],
-        { cwd: main.projectPath() }
+        ["mix", "format", "-"],
+        { input: "input text", cwd: main.projectPath() }
       );
     });
 
@@ -124,8 +118,8 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
-        ["mix", "format", "/tmp/file"],
-        { cwd: main.projectPath() }
+        ["mix", "format", "-"],
+        { input: "input text", cwd: main.projectPath() }
       );
     });
 
@@ -135,8 +129,8 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["mix", "format", "/tmp/file"],
-        { cwd: main.projectPath() }
+        ["mix", "format", "-"],
+        { input: "input text", cwd: main.projectPath() }
       );
     });
 
@@ -146,8 +140,8 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["/path/to/mix", "format", "/tmp/file"],
-        { cwd: main.projectPath() }
+        ["/path/to/mix", "format", "-"],
+        { input: "input text", cwd: main.projectPath() }
       );
     });
 
@@ -156,8 +150,8 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["mix", "format", "/tmp/file"],
-        { cwd: main.projectPath() }
+        ["mix", "format", "-"],
+        { input: "input text", cwd: main.projectPath() }
       );
     });
 
@@ -167,8 +161,8 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["mix", "format", "/tmp/file"],
-        {}
+        ["mix", "format", "-"],
+        { input: "input text" }
       );
     });
   });
