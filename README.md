@@ -4,7 +4,7 @@
 
 ![header](header.png)
 
-An Atom package to format Elixir source code.
+Elixir source code formatter for the Atom editor.
 
 ![demo](demo.gif)
 
