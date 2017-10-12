@@ -24,7 +24,7 @@ Install the **atom-elixir-formatter** package.
 apm install atom-elixir-formatter
 ```
 
-From the **atom-elixir-formatter** settings in Atom, set **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
+Then from the **atom-elixir-formatter** settings in Atom, set **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
 
 ## Maintainers
 
