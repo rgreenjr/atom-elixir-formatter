@@ -55,6 +55,13 @@ describe("Main", () => {
     });
   });
 
+  describe("elixirExecutable", () => {
+    it("defaults to 'mix' when undefined", () => {
+      atom.config.set("atom-elixir-formatter.elixirExecutable", undefined);
+      expect(main.elixirExecutable()).toEqual("elixir");
+    });
+  });
+
   describe("mixExecutable", () => {
     it("defaults to 'mix' when undefined", () => {
       atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
