@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.6 - 2017-10-12
+
+- Format entire file on save even if text selection exists
+
 ## 0.1.5 - 2017-10-11
 
 - Add better installation instructions to README
