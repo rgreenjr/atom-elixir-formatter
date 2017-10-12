@@ -4,13 +4,15 @@
 
 ![header](header.png)
 
-Elixir source code formatter for the Atom editor.
-
 ![demo](demo.gif)
+
+## Description
+
+Elixir source code formatter for the Atom editor. It automatically formats Elixir code using the new formatter in Elixir 1.6.
 
 ## Installation
 
-Note that **atom-elixir-formatter** requires Elixir 1.6, which is currently unreleased. You'll need to download and compile the master branch of Elixir.
+Note that `atom-elixir-formatter` requires Elixir 1.6, which is currently unreleased. You'll need to download and compile the master branch of Elixir:
 
 ```sh
 git clone https://github.com/elixir-lang/elixir.git
@@ -18,13 +20,19 @@ cd elixir
 make clean test
 ```
 
-Install the **atom-elixir-formatter** package.
+Install the `atom-elixir-formatter` package:
 
 ```sh
 apm install atom-elixir-formatter
 ```
 
-Then from the **atom-elixir-formatter** settings in Atom, set **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
+Restart Atom and change the `atom-elixir-formatter` settings for **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
+
+## Usage
+
+Elixir files are formatted automatically on save. This can be disabled in Settings.
+
+You can manually format sections of code using the keyboard shortcut <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>F</kbd>.
 
 ## Maintainers
 
