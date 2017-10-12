@@ -32,7 +32,7 @@ describe("Formatter", () => {
 
       const editor = atom.workspace.getActiveTextEditor();
       editor.setText("initial text");
-      formatter.formatTextEditor(editor);
+      formatter.formatTextEditor(editor, editor.getText(), null);
       expect(editor.getText()).toEqual("replacement text");
       expect(atom.notifications.getNotifications().length).toBe(0);
     });
@@ -40,15 +40,19 @@ describe("Formatter", () => {
     it("replaces selected text with stdout when text selection exists", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 0,
-        stdout: "REPLACEMENT\n",
+        stdout: "REPLACEMENT TEXT\n",
         stderr: null
       });
 
       const editor = atom.workspace.getActiveTextEditor();
       editor.setText("Row1\nRow2\nRow3");
       editor.setSelectedBufferRange([[1, 0], [2, 0]]); // select 2nd row
-      formatter.formatTextEditor(editor);
-      expect(editor.getText()).toEqual("Row1\nREPLACEMENT\nRow3");
+      formatter.formatTextEditor(
+        editor,
+        editor.getText(),
+        editor.getSelectedBufferRange()
+      );
+      expect(editor.getText()).toEqual("Row1\nREPLACEMENT TEXT\nRow3");
       expect(atom.notifications.getNotifications().length).toBe(0);
     });
 
