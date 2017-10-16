@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
+    "indent": ["warn", 2],
+    "linebreak-style": ["error", "unix"],
+    "no-trailing-spaces": ["error"],
+    "quotes": ["error", "double"],
+    "space-in-parens": ["warn", "never"]
+  }
+}
