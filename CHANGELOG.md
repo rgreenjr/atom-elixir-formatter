@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.2.0 - 2017-10-23
+
+- Use STDIN/STDOUT to communicate with formatter
+- Add Usage and Description sections to README
+- Add .eslintrc file to enforce JavaScript style
+
 ## 0.1.6 - 2017-10-12
 
 - Format entire file on save even if text selection exists
