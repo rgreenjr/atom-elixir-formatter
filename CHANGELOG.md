@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.1 - 2017-10-23
+
+- Fix header image in README
+
 ## 0.2.0 - 2017-10-23
 
 - Use STDIN/STDOUT to communicate with formatter
