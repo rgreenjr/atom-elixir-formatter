@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/rgreenjr/atom-elixir-formatter.svg?branch=master)](https://travis-ci.org/rgreenjr/atom-elixir-formatter) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-![header](images/header.png)
+![header](images/heading.png)
 
 ![demo](images/demo.gif)
 
