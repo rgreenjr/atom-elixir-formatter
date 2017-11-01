@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.2.2 - 2017-11-01
+
+- Format entire file when selected buffer range is empty
+- Remove tmp package dependency
+
 ## 0.2.1 - 2017-10-23
 
 - Fix header image in README
