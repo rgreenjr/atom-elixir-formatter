@@ -166,4 +166,22 @@ describe("Formatter", () => {
       );
     });
   });
+
+  describe("getSelectedRange", () => {
+    it("returns null when selected buffer range is empty", () => {
+      const editor = atom.workspace.getActiveTextEditor();
+      editor.setText("some text");
+      editor.setSelectedBufferRange([[0, 2], [0, 2]]);
+      expect(formatter.getSelectedRange(editor)).toEqual(null);
+    });
+
+    it("returns selected buffer range", () => {
+      const editor = atom.workspace.getActiveTextEditor();
+      editor.setText("some text");
+      editor.setSelectedBufferRange([[0, 0], [0, 4]]);
+      expect(formatter.getSelectedRange(editor)).toEqual(
+        editor.getSelectedBufferRange()
+      );
+    });
+  });
 });
