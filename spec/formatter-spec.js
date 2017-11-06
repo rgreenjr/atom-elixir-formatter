@@ -105,7 +105,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
         ["mix", "format", "-"],
-        { input: "input text", cwd: main.projectPath() }
+        { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
@@ -119,7 +119,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
         ["mix", "format", "-"],
-        { input: "input text", cwd: main.projectPath() }
+        { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
@@ -130,7 +130,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
         ["mix", "format", "-"],
-        { input: "input text", cwd: main.projectPath() }
+        { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
@@ -141,7 +141,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
         ["/path/to/mix", "format", "-"],
-        { input: "input text", cwd: main.projectPath() }
+        { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
@@ -151,7 +151,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
         ["mix", "format", "-"],
-        { input: "input text", cwd: main.projectPath() }
+        { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
@@ -162,7 +162,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
         ["mix", "format", "-"],
-        { input: "input text" }
+        { input: "input text", shell: true }
       );
     });
   });
