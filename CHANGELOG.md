@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.2.3 - 2017-11-07
+
+- Fix "spawnSync elixir ENOENT" error on Windows (@indyone)
+- Display Node.js error messages in notifications (@indyone)
+
 ## 0.2.2 - 2017-11-01
 
 - Format entire file when selected buffer range is empty
