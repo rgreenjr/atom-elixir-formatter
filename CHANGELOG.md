@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.4 - 2017-11-07
+
+- Quote executable paths when they contain spaces
+
 ## 0.2.3 - 2017-11-07
 
 - Fix "spawnSync elixir ENOENT" error on Windows (@indyone)
