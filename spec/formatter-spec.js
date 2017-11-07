@@ -112,12 +112,14 @@ describe("Formatter", () => {
     it("uses elixirExecutable setting when defined", () => {
       atom.config.set(
         "atom-elixir-formatter.elixirExecutable",
-        "/path/to/elixir"
+        "/path with spaces/elixir"
       );
       formatter.runFormat("input text");
 
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "/path/to/elixir",
+      expect(
+        process.spawnSync
+      ).toHaveBeenCalledWith(
+        "'/path with spaces/elixir'",
         ["mix", "format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
@@ -135,12 +137,15 @@ describe("Formatter", () => {
     });
 
     it("uses mixExecutable setting when defined", () => {
-      atom.config.set("atom-elixir-formatter.mixExecutable", "/path/to/mix");
+      atom.config.set(
+        "atom-elixir-formatter.mixExecutable",
+        "/path with spaces/mix"
+      );
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["/path/to/mix", "format", "-"],
+        ["'/path with spaces/mix'", "format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
