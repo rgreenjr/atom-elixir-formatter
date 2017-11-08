@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.2.5 - 2017-11-08
+## 0.2.6 - 2017-11-08
 
 - Use double-quotes on paths with spaces for Windows compatibility
 
