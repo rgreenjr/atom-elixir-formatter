@@ -119,7 +119,7 @@ describe("Formatter", () => {
       expect(
         process.spawnSync
       ).toHaveBeenCalledWith(
-        "'/path with spaces/elixir'",
+        '"/path with spaces/elixir"',
         ["mix", "format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
@@ -145,7 +145,7 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "elixir",
-        ["'/path with spaces/mix'", "format", "-"],
+        ['"/path with spaces/mix"', "format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
