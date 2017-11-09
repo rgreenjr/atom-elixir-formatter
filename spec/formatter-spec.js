@@ -96,6 +96,7 @@ describe("Formatter", () => {
   describe("runFormat", () => {
     beforeEach(function() {
       spyOn(process, "spawnSync").andReturn({});
+      spyOn(main, "isWindowsPlatform").andReturn(false);
     });
 
     it("calls mix directly when elixirExecutable has default value", () => {
@@ -103,7 +104,6 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
         input: "input text",
-        shell: true,
         cwd: main.projectPath()
       });
     });
@@ -118,7 +118,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
         ["/path/to/mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
+        { input: "input text", cwd: main.projectPath() }
       );
     });
 
@@ -127,8 +127,21 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
+        input: "input text"
+      });
+    });
+  });
+
+  describe("runFormat on Windows", () => {
+    it("enables shell option when platform is Windows", () => {
+      spyOn(process, "spawnSync").andReturn({});
+      spyOn(main, "isWindowsPlatform").andReturn(true);
+      formatter.runFormat("input text");
+
+      expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
         input: "input text",
-        shell: true
+        shell: true,
+        cwd: main.projectPath()
       });
     });
   });
