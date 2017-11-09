@@ -42,7 +42,7 @@
 
 ## 0.1.3 - 2017-10-11
 
-- Set project path as current working directory when executing 'mix format'
+- Set cwd to editor's project path so ".formatter.exs" are used (@rickclare)
 - Add spec tests
 
 ## 0.1.2 - 2017-10-10
