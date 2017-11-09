@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/rgreenjr/atom-elixir-formatter.svg?branch=master)](https://travis-ci.org/rgreenjr/atom-elixir-formatter) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](<>)
 
-![header](images/heading.png)
+![header](https://raw.githubusercontent.com/rgreenjr/atom-elixir-formatter/master/images/heading.png)
 
-![demo](images/demo.gif)
+![demo](https://raw.githubusercontent.com/rgreenjr/atom-elixir-formatter/master/images/demo.gif)
 
 ## Description
 
@@ -38,7 +38,7 @@ apm install atom-elixir-formatter
 
 Restart Atom and change the `atom-elixir-formatter` settings for **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
 
-![settings](images/settings.png)
+![settings](https://raw.githubusercontent.com/rgreenjr/atom-elixir-formatter/master/images/settings.png)
 
 ## Usage
 
