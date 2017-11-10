@@ -20,16 +20,6 @@ cd elixir
 make clean test
 ```
 
-> IMPORTANT: `atom-elixir-formatter` recently changed the way it communicates with the Elixir code formatter. It uses the new `-` option that was added to the Elixir master branch on October 17, 2017. This allows formatting via `STDIN`/`STDOUT`, which eliminates the need for temporary files and reduces latency.
->
-> **If you downloaded and compiled the master branch of Elixir prior to that date, you will need to update your local Elixir repo and recompile:**
-
-```sh
-# from your local Elixir 1.6 repo
-git pull
-make clean test
-```
-
 Install the `atom-elixir-formatter` package:
 
 ```sh
