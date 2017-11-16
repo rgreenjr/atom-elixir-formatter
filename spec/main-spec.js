@@ -47,25 +47,41 @@ describe("Main", () => {
         "elixir"
       );
     });
+  });
 
-    it("should default mixExecutable to 'mix'", () => {
-      expect(atom.config.get("atom-elixir-formatter.mixExecutable")).toEqual(
-        "mix"
+  describe("getElixirPath", () => {
+    it("returns unquoted path when elixirExecutable has no spaces", () => {
+      atom.config.set(
+        "atom-elixir-formatter.elixirExecutable",
+        "/path/to/elixir"
       );
+      expect(main.getElixirPath()).toEqual("/path/to/elixir");
+    });
+
+    it("returns quoted path when elixirExecutable has spaces", () => {
+      atom.config.set(
+        "atom-elixir-formatter.elixirExecutable",
+        "/path with spaces/mix"
+      );
+      expect(main.getElixirPath()).toEqual('"/path with spaces/mix"');
     });
   });
 
-  describe("elixirExecutable", () => {
-    it("defaults to 'elixir' when undefined", () => {
-      atom.config.set("atom-elixir-formatter.elixirExecutable", undefined);
-      expect(main.elixirExecutable()).toEqual("elixir");
+  describe("getMixPath", () => {
+    it("returns path based on elixirExecutable setting", () => {
+      atom.config.set(
+        "atom-elixir-formatter.elixirExecutable",
+        "/path/to/elixir"
+      );
+      expect(main.getMixPath()).toEqual("/path/to/mix");
     });
-  });
 
-  describe("mixExecutable", () => {
-    it("defaults to 'mix' when undefined", () => {
-      atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
-      expect(main.mixExecutable()).toEqual("mix");
+    it("returns quoted path based on elixirExecutable", () => {
+      atom.config.set(
+        "atom-elixir-formatter.elixirExecutable",
+        "/path with spaces/elixir"
+      );
+      expect(main.getMixPath()).toEqual('"/path with spaces/mix"');
     });
   });
 });
