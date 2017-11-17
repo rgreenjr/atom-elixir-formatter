@@ -26,7 +26,7 @@ Install the `atom-elixir-formatter` package:
 apm install atom-elixir-formatter
 ```
 
-Restart Atom and change the `atom-elixir-formatter` settings for **Elixir Executable** and **Mix Executable** to the absolute paths of the `elixir` and `mix` executables.
+Restart Atom and change the `atom-elixir-formatter` settings for **Elixir Executable** to the absolute path of the `elixir` executable.
 
 ![settings](https://raw.githubusercontent.com/rgreenjr/atom-elixir-formatter/master/images/settings.png)
 
