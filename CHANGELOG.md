@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.0 - 2017-11-17
+
+- Remove mixExecutable and use elixirExecutable to determine mix path
+
 ## 0.2.6 - 2017-11-08
 
 - Use double-quotes on paths with spaces for Windows compatibility
