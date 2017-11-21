@@ -1,9 +1,9 @@
 "use babel";
 
-import * as path from "path";
 import formatter from "../lib/formatter";
 import helper from "./helper";
 import main from "../lib/main";
+import path from "path";
 import process from "child_process";
 
 const validFile = path.join(__dirname, "fixtures", "valid.ex");
