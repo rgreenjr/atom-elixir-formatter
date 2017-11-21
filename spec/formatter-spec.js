@@ -98,77 +98,38 @@ describe("Formatter", () => {
       spyOn(process, "spawnSync").andReturn({});
     });
 
-    it("uses default elixir when elixirExecutable setting undefined", () => {
-      atom.config.set("atom-elixir-formatter.elixirExecutable", undefined);
+    it("calls mix directly when elixirExecutable has default value", () => {
       formatter.runFormat("input text");
 
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
-      );
+      expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
+        input: "input text",
+        shell: true,
+        cwd: main.projectPath()
+      });
     });
 
     it("uses elixirExecutable setting when defined", () => {
       atom.config.set(
         "atom-elixir-formatter.elixirExecutable",
-        "/path with spaces/elixir"
-      );
-      formatter.runFormat("input text");
-
-      expect(
-        process.spawnSync
-      ).toHaveBeenCalledWith(
-        '"/path with spaces/elixir"',
-        ["mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
-      );
-    });
-
-    it("uses default mix when mixExecutable setting undefined", () => {
-      atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
-      formatter.runFormat("input text");
-
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
-      );
-    });
-
-    it("uses mixExecutable setting when defined", () => {
-      atom.config.set(
-        "atom-elixir-formatter.mixExecutable",
-        "/path with spaces/mix"
+        "/path/to/elixir"
       );
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ['"/path with spaces/mix"', "format", "-"],
+        "/path/to/elixir",
+        ["/path/to/mix", "format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
-    it("sets cwd when project path defined", () => {
-      formatter.runFormat("input text");
-
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
-      );
-    });
-
-    it("doesn't set cwd when project path undefined", () => {
+    it("does not set cwd when project path undefined", () => {
       spyOn(main, "projectPath").andReturn(undefined);
       formatter.runFormat("input text");
 
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
-        { input: "input text", shell: true }
-      );
+      expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
+        input: "input text",
+        shell: true
+      });
     });
   });
 
