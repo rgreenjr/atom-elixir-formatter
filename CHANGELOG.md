@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.4.0 - 2017-11-22
+
+- Support conditional formatOnSave based on .formatter.exs presence (@hopsor)
+- Only set shell option on Windows
+- Move setting logic into separate module
+
 ## 0.3.0 - 2017-11-17
 
 - Remove mixExecutable and use elixirExecutable to determine mix path
