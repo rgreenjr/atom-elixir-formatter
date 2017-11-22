@@ -20,7 +20,9 @@ describe("Settings", () => {
 
   describe("package settings", () => {
     it("should default formatOnSave to true", () => {
-      expect(atom.config.get("atom-elixir-formatter.formatOnSave")).toBe(true);
+      expect(atom.config.get("atom-elixir-formatter.formatOnSave")).toBe(
+        "always"
+      );
     });
 
     it("should default showErrorNotifications to true", () => {
@@ -63,6 +65,38 @@ describe("Settings", () => {
 
     it("returns unquoted path when it does not contains spaces", () => {
       expect(settings.quotePath("/no/spaces")).toEqual("/no/spaces");
+    });
+  });
+
+  describe("shouldFormatOnSave", () => {
+    it("returns true when formatOnSave is 'always'", () => {
+      atom.config.set("atom-elixir-formatter.formatOnSave", "always");
+      expect(settings.shouldFormatOnSave()).toBe(true);
+    });
+
+    it("returns true when formatOnSave is 'whenFormatterFilePresent' and formatter file present", () => {
+      spyOn(settings, "isFormatterFilePresent").andReturn(true);
+
+      atom.config.set(
+        "atom-elixir-formatter.formatOnSave",
+        "whenFormatterFilePresent"
+      );
+      expect(settings.shouldFormatOnSave()).toBe(true);
+    });
+
+    it("returns false when formatOnSave is 'whenFormatterFilePresent' and formatter file not present", () => {
+      spyOn(settings, "isFormatterFilePresent").andReturn(false);
+
+      atom.config.set(
+        "atom-elixir-formatter.formatOnSave",
+        "whenFormatterFilePresent"
+      );
+      expect(settings.shouldFormatOnSave()).toBe(false);
+    });
+
+    it("returns false when formatOnSave is 'never'", () => {
+      atom.config.set("atom-elixir-formatter.formatOnSave", "never");
+      expect(settings.shouldFormatOnSave()).toBe(false);
     });
   });
 });
