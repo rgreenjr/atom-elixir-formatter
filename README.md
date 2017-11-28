@@ -8,12 +8,13 @@
 
 ## Description
 
-An Elixir source code formatter for the Atom editor. It automatically formats
-Elixir code using the new formatter in Elixir v1.6.
+**Atom Elixir Formatter** is an Elixir source code formatter for the Atom
+editor. It automatically formats Elixir using the new code formatter in Elixir
+v1.6.
 
 ## Installation
 
-Note that `atom-elixir-formatter` requires Elixir v1.6, which is currently
+Note that **Atom Elixir Formatter** requires Elixir v1.6, which is currently
 unreleased. You'll need to download and compile the master branch of Elixir:
 
 ```sh
