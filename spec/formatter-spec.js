@@ -25,8 +25,7 @@ describe("Formatter", () => {
     it("formats all text when range parameter not given", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 0,
-        stdout: "replacement text",
-        stderr: null
+        stdout: "replacement text"
       });
 
       const editor = atom.workspace.getActiveTextEditor();
@@ -39,8 +38,7 @@ describe("Formatter", () => {
     it("formats specified text range when range parameter given", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 0,
-        stdout: "REPLACEMENT TEXT\n",
-        stderr: null
+        stdout: "REPLACEMENT TEXT\n"
       });
 
       const editor = atom.workspace.getActiveTextEditor();
@@ -54,7 +52,6 @@ describe("Formatter", () => {
     it("displays error notification when status is nonzero", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 1,
-        stdout: null,
         stderr: "stderr msg"
       });
 
@@ -72,6 +69,24 @@ describe("Formatter", () => {
         type: "error",
         detail: "exception msg"
       });
+    });
+
+    it("dismisses outstanding notifications when successful", () => {
+      spyOn(formatter, "runFormat").andReturn({
+        status: 0,
+        stdout: "replacement text"
+      });
+
+      atom.notifications.addError("Placeholder", { dismissable: true });
+      expect(atom.notifications.getNotifications().length).toBe(1);
+      expect(atom.notifications.getNotifications()[0].dismissed).toBe(false);
+
+      const editor = atom.workspace.getActiveTextEditor();
+      editor.setText("initial text");
+      formatter.formatTextEditor(editor);
+      expect(editor.getText()).toEqual("replacement text");
+      expect(atom.notifications.getNotifications().length).toBe(1);
+      expect(atom.notifications.getNotifications()[0].dismissed).toBe(true);
     });
   });
 
