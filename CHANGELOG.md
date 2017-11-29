@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.1 - 2017-11-29
+
+* Add new formatOnSave setting to README
+
 ## 0.4.0 - 2017-11-22
 
 * Support conditional formatOnSave based on .formatter.exs presence (@hopsor)
