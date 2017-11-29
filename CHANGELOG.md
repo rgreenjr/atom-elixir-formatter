@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.2 - 2017-11-29
+
+* Dismiss outstanding notification on format success
+
 ## 0.4.1 - 2017-11-29
 
 * Add new formatOnSave setting to README
