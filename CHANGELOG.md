@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.3 - 2017-12-01
+
+* Use setTextViaDiff to maintain bookmarks and other document metadata
+
 ## 0.4.2 - 2017-11-29
 
 * Dismiss outstanding notification on format success
