@@ -2,7 +2,7 @@
 
 ## 0.4.3 - 2017-12-01
 
-* Use setTextViaDiff to maintain bookmarks and other document metadata
+* Use setTextViaDiff to maintain bookmarks and other metadata (@balduncle)
 
 ## 0.4.2 - 2017-11-29
 
