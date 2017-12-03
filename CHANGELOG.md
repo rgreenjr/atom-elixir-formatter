@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.4 - 2017-12-03
+
+* Change menu command to "Format" since action is contextual based on selection
+
 ## 0.4.3 - 2017-12-01
 
 * Use setTextViaDiff to maintain bookmarks and other metadata (@balduncle)
