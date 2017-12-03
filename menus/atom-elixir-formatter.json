@@ -7,7 +7,7 @@
           "label": "Elixir Formatter",
           "submenu": [
             {
-              "label": "Format File",
+              "label": "Format",
               "command": "atom-elixir-formatter:format"
             }
           ]
