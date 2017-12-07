@@ -1,8 +1,9 @@
 "use babel";
 
 import formatter from "../lib/formatter";
-import helper from "./helper";
+import specHelper from "./spec-helper";
 import main from "../lib/main";
+import notificationHelper from "../lib/notification-helper";
 import path from "path";
 import process from "child_process";
 
@@ -49,44 +50,33 @@ describe("Formatter", () => {
       expect(atom.notifications.getNotifications().length).toBe(0);
     });
 
-    it("displays error notification when status is nonzero", () => {
+    it("displays error notification when status is non-zero", () => {
       spyOn(formatter, "runFormat").andReturn({
         status: 1,
         stderr: "stderr msg"
       });
 
       formatter.formatTextEditor(atom.workspace.getActiveTextEditor());
-      helper.verifyNotification("Elixir Formatter Error", {
+      specHelper.verifyNotification("Elixir Formatter Error", {
         type: "error",
         detail: "stderr msg"
       });
     });
 
-    it("displays error notification when exception is thrown", () => {
+    it("displays error notification when an exception is thrown", () => {
       spyOn(formatter, "runFormat").andThrow("exception msg");
       formatter.formatTextEditor(atom.workspace.getActiveTextEditor());
-      helper.verifyNotification("Elixir Formatter Exception", {
+      specHelper.verifyNotification("Elixir Formatter Exception", {
         type: "error",
         detail: "exception msg"
       });
     });
 
     it("dismisses outstanding notifications when successful", () => {
-      spyOn(formatter, "runFormat").andReturn({
-        status: 0,
-        stdout: "replacement text"
-      });
-
-      atom.notifications.addError("Placeholder", { dismissable: true });
-      expect(atom.notifications.getNotifications().length).toBe(1);
-      expect(atom.notifications.getNotifications()[0].dismissed).toBe(false);
-
-      const editor = atom.workspace.getActiveTextEditor();
-      editor.setText("initial text");
-      formatter.formatTextEditor(editor);
-      expect(editor.getText()).toEqual("replacement text");
-      expect(atom.notifications.getNotifications().length).toBe(1);
-      expect(atom.notifications.getNotifications()[0].dismissed).toBe(true);
+      spyOn(formatter, "runFormat").andReturn({ status: 0, stdout: "result" });
+      spyOn(notificationHelper, "dismissNotifications");
+      formatter.formatActiveTextEditor();
+      expect(notificationHelper.dismissNotifications).toHaveBeenCalled();
     });
   });
 
@@ -99,7 +89,7 @@ describe("Formatter", () => {
           .open(filePath)
           .then(editor => formatter.formatActiveTextEditor())
           .then(() =>
-            helper.verifyNotification(
+            specHelper.verifyNotification(
               "Elixir Formatter only formats Elixir source code",
               { type: "info" }
             )
@@ -137,7 +127,7 @@ describe("Formatter", () => {
       );
     });
 
-    it("does not set cwd when project path undefined", () => {
+    it("does not set cwd when projectPath is undefined", () => {
       spyOn(main, "projectPath").andReturn(undefined);
       formatter.runFormat("input text");
 
@@ -158,24 +148,6 @@ describe("Formatter", () => {
         shell: true,
         cwd: main.projectPath()
       });
-    });
-  });
-
-  describe("getSelectedRange", () => {
-    it("returns null when selected buffer range is empty", () => {
-      const editor = atom.workspace.getActiveTextEditor();
-      editor.setText("some text");
-      editor.setSelectedBufferRange([[0, 2], [0, 2]]);
-      expect(formatter.getSelectedRange(editor)).toEqual(null);
-    });
-
-    it("returns selected buffer range", () => {
-      const editor = atom.workspace.getActiveTextEditor();
-      editor.setText("some text");
-      editor.setSelectedBufferRange([[0, 0], [0, 4]]);
-      expect(formatter.getSelectedRange(editor)).toEqual(
-        editor.getSelectedBufferRange()
-      );
     });
   });
 });
