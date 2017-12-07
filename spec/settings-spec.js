@@ -19,7 +19,7 @@ describe("Settings", () => {
   });
 
   describe("package settings", () => {
-    it("should default formatOnSave to true", () => {
+    it("should default formatOnSave to 'always'", () => {
       expect(atom.config.get("atom-elixir-formatter.formatOnSave")).toBe(
         "always"
       );
