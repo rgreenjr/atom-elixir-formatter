@@ -19,20 +19,74 @@ describe("EditorHelper", () => {
   });
 
   describe("getSelectedRange", () => {
-    it("returns null when selected buffer range is empty", () => {
+    it("returns range when selection range isn't empty", () => {
       const editor = atom.workspace.getActiveTextEditor();
-      editor.setText("some text");
+      editor.setSelectedBufferRange([[0, 0], [0, 4]]);
+      expect(editorHelper.getSelectedRange(editor)).toEqual({
+        start: { row: 0, column: 0 },
+        end: { row: 0, column: 4 }
+      });
+    });
+
+    it("returns null when selection range is empty", () => {
+      const editor = atom.workspace.getActiveTextEditor();
       editor.setSelectedBufferRange([[0, 2], [0, 2]]);
       expect(editorHelper.getSelectedRange(editor)).toEqual(null);
     });
+  });
 
-    it("returns selected buffer range", () => {
-      const editor = atom.workspace.getActiveTextEditor();
+  describe("getTextInRange", () => {
+    beforeEach(function() {
+      editor = atom.workspace.getActiveTextEditor();
       editor.setText("some text");
-      editor.setSelectedBufferRange([[0, 0], [0, 4]]);
-      expect(editorHelper.getSelectedRange(editor)).toEqual(
-        editor.getSelectedBufferRange()
-      );
+    });
+
+    it("returns text in given range", () => {
+      const range = [[0, 0], [0, 4]];
+      expect(editorHelper.getTextInRange(editor, range)).toEqual("some");
+    });
+
+    it("returns all text when range is null", () => {
+      expect(editorHelper.getTextInRange(editor, null)).toEqual("some text");
+    });
+
+    it("returns all text when no range is given", () => {
+      expect(editorHelper.getTextInRange(editor)).toEqual("some text");
+    });
+  });
+
+  describe("indentText", () => {
+    beforeEach(function() {
+      editor = atom.workspace.getActiveTextEditor();
+      range = { start: { row: 0, column: 0 } };
+    });
+
+    describe("when softTabs is true", () => {
+      it("adds spaces to match indention of first line of range", () => {
+        editor.softTabs = true;
+
+        editor.setText("no indention");
+        expect(editorHelper.indentText(editor, range, "foo")).toEqual("foo");
+
+        editor.setText("    four space indention");
+        expect(editorHelper.indentText(editor, range, "foo")).toEqual(
+          "    foo"
+        );
+      });
+    });
+
+    describe("when softTabs is false", () => {
+      it("adds tabs to match indention of first line of range", () => {
+        editor.softTabs = false;
+
+        editor.setText("no indention");
+        expect(editorHelper.indentText(editor, range, "foo")).toEqual("foo");
+
+        editor.setText("    four space indention");
+        expect(editorHelper.indentText(editor, range, "foo")).toEqual(
+          "\t\tfoo"
+        );
+      });
     });
   });
 });
