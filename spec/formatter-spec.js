@@ -109,7 +109,7 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
         input: "input text",
-        cwd: main.projectPath()
+        cwd: main.getProjectPath()
       });
     });
 
@@ -123,12 +123,12 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
         ["/path/to/mix", "format", "-"],
-        { input: "input text", cwd: main.projectPath() }
+        { input: "input text", cwd: main.getProjectPath() }
       );
     });
 
-    it("does not set cwd when projectPath is undefined", () => {
-      spyOn(main, "projectPath").andReturn(undefined);
+    it("does not set cwd when project path is undefined", () => {
+      spyOn(main, "getProjectPath").andReturn(undefined);
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
@@ -146,7 +146,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
         input: "input text",
         shell: true,
-        cwd: main.projectPath()
+        cwd: main.getProjectPath()
       });
     });
   });
