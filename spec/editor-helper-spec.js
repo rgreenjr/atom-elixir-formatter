@@ -35,6 +35,32 @@ describe("EditorHelper", () => {
     });
   });
 
+  describe("insertText", () => {
+    beforeEach(function() {
+      editor = atom.workspace.getActiveTextEditor();
+      editor.setText("pre-formatted text");
+      editor.setCursorScreenPosition({ row: 0, column: 3 });
+      text = "post";
+    });
+
+    describe("when range is not null", () => {
+      it("replaces text in range and places cursor at start of range", () => {
+        range = { start: { row: 0, column: 0 }, end: { row: 0, column: 3 } };
+        editorHelper.insertText(editor, range, text);
+        expect(editor.getText()).toEqual("post-formatted text");
+        expect(editor.getCursorScreenPosition()).toEqual({ row: 0, column: 0 });
+      });
+    });
+
+    describe("when range is null", () => {
+      it("replaces entire text buffer and maintains cursor position", () => {
+        editorHelper.insertText(editor, null, text);
+        expect(editor.getText()).toEqual("post");
+        expect(editor.getCursorScreenPosition()).toEqual({ row: 0, column: 3 });
+      });
+    });
+  });
+
   describe("getTextInRange", () => {
     beforeEach(function() {
       editor = atom.workspace.getActiveTextEditor();
