@@ -16,6 +16,7 @@ Note that Atom Elixir Formatter requires Elixir v1.6, which is currently
 unreleased. You'll need to download and compile the master branch of Elixir:
 
 ```sh
+# download and compile master branch of Elixir
 git clone https://github.com/elixir-lang/elixir.git
 cd elixir
 make clean test
@@ -24,6 +25,7 @@ make clean test
 Next, install the `atom-elixir-formatter` package:
 
 ```sh
+# install atom-elixir-formatter package
 apm install atom-elixir-formatter
 ```
 
