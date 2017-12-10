@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.5 - 2017-12-10
+
+* Correctly assign cwd when project contains multiple project folders
+* Add additional spec tests
+
 ## 0.4.4 - 2017-12-03
 
 * Change menu command to "Format" since action is contextual based on selection
