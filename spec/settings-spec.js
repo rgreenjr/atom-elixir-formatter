@@ -6,16 +6,15 @@ import settings from "../lib/settings";
 const validFile = path.join(__dirname, "fixtures", "valid.ex");
 
 describe("Settings", () => {
-  let activationPromise;
-
   beforeEach(() => {
-    activationPromise = atom.packages.activatePackage("atom-elixir-formatter");
-
     waitsForPromise(() =>
       atom.packages
         .activatePackage("language-elixir")
         .then(() => atom.workspace.open(validFile))
+        .then(() => atom.packages.activatePackage("atom-elixir-formatter"))
     );
+
+    atom.packages.triggerDeferredActivationHooks();
   });
 
   describe("package settings", () => {

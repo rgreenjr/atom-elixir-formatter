@@ -11,16 +11,15 @@ const validFile = path.join(__dirname, "fixtures", "valid.ex");
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe("Main", () => {
-  let activationPromise;
-
   beforeEach(() => {
-    activationPromise = atom.packages.activatePackage("atom-elixir-formatter");
-
     waitsForPromise(() =>
       atom.packages
         .activatePackage("language-elixir")
         .then(() => atom.workspace.open(validFile))
+        .then(() => atom.packages.activatePackage("atom-elixir-formatter"))
     );
+
+    atom.packages.triggerDeferredActivationHooks();
   });
 
   it("should be in packages list", () => {

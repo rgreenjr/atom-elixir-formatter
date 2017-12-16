@@ -10,15 +10,14 @@ import process from "child_process";
 const validFile = path.join(__dirname, "fixtures", "valid.ex");
 
 describe("Formatter", () => {
-  let activationPromise;
-
   beforeEach(() => {
-    activationPromise = atom.packages.activatePackage("atom-elixir-formatter");
     waitsForPromise(() =>
       atom.packages
         .activatePackage("language-elixir")
         .then(() => atom.workspace.open(validFile))
+        .then(() => atom.packages.activatePackage("atom-elixir-formatter"))
     );
+
     atom.packages.triggerDeferredActivationHooks();
   });
 
