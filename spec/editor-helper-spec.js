@@ -23,15 +23,14 @@ describe("EditorHelper", () => {
 
   describe("getSelectedRange", () => {
     it("returns range when selection range isn't empty", () => {
-      editor.setSelectedBufferRange([[0, 0], [0, 4]]);
-      expect(editorHelper.getSelectedRange(editor)).toEqual({
-        start: { row: 0, column: 0 },
-        end: { row: 0, column: 4 }
-      });
+      range = { start: { row: 0, column: 0 }, end: { row: 0, column: 4 } };
+      editor.setSelectedBufferRange(range);
+      expect(editorHelper.getSelectedRange(editor)).toEqual(range);
     });
 
     it("returns null when selection range is empty", () => {
-      editor.setSelectedBufferRange([[0, 2], [0, 2]]);
+      range = { start: { row: 0, column: 0 }, end: { row: 0, column: 0 } };
+      editor.setSelectedBufferRange(range);
       expect(editorHelper.getSelectedRange(editor)).toEqual(null);
     });
   });
