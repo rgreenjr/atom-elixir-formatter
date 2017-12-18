@@ -7,40 +7,34 @@
 
 ## Description
 
-An Elixir source code formatter for the Atom editor. It automatically formats
-Elixir using the new code formatter in Elixir v1.6.
+An [Elixir](https://elixir-lang.org) source code formatter for the Atom editor. It automatically formats
+Elixir using the code formatter introduced in Elixir v1.6.
+
+## Requirements
+
+Atom Elixir Formatter requires Elixir v1.6 or later.
 
 ## Installation
 
-Note that Atom Elixir Formatter requires Elixir v1.6, which is currently
-unreleased. You'll need to download and compile the master branch of Elixir:
+Open **Settings** ⟶ **Install** and search for `atom-elixir-formatter`.
+
+Alternatively, install through the terminal:
 
 ```sh
-# download and compile master branch of Elixir
-git clone https://github.com/elixir-lang/elixir.git
-cd elixir
-make clean test
-```
-
-Next, install the `atom-elixir-formatter` package:
-
-```sh
-# install atom-elixir-formatter package
 apm install atom-elixir-formatter
 ```
-
-Last, restart Atom and change the `atom-elixir-formatter` setting for **Elixir
-Executable** to the absolute path of your `elixir` executable.
-
-![settings](https://raw.githubusercontent.com/rgreenjr/atom-elixir-formatter/master/images/settings.png)
 
 ## Usage
 
 Elixir files are formatted automatically on save. This can be disabled in
-Settings, or set to occur only when projects include a `.formatter.exs` file.
+**Settings**, or set to occur only when projects include a `.formatter.exs` file.
 
 You can manually format sections of code using the keyboard shortcut
 <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>F</kbd>.
+
+By default, Atom Elixir Formatter uses the `elixir` executable resolved on `$PATH`. You can override this behavior by going to **Settings** ⟶ **Packages** ⟶ **Atom Elixir Formatter** and setting **Elixir Executable** to the absolute path of an `elixir` executable.
+
+![settings](https://raw.githubusercontent.com/rgreenjr/atom-elixir-formatter/master/images/settings.png)
 
 ## Maintainers
 
