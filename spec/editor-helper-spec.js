@@ -6,6 +6,8 @@ import path from "path";
 const validFile = path.join(__dirname, "fixtures", "valid.ex");
 
 describe("EditorHelper", () => {
+  let editor;
+
   beforeEach(() => {
     waitsForPromise(() =>
       atom.packages
@@ -14,12 +16,13 @@ describe("EditorHelper", () => {
         .then(() => atom.packages.activatePackage("atom-elixir-formatter"))
     );
 
+    runs(() => (editor = atom.workspace.getActiveTextEditor()));
+
     atom.packages.triggerDeferredActivationHooks();
   });
 
   describe("getSelectedRange", () => {
     it("returns range when selection range isn't empty", () => {
-      const editor = atom.workspace.getActiveTextEditor();
       editor.setSelectedBufferRange([[0, 0], [0, 4]]);
       expect(editorHelper.getSelectedRange(editor)).toEqual({
         start: { row: 0, column: 0 },
@@ -28,7 +31,6 @@ describe("EditorHelper", () => {
     });
 
     it("returns null when selection range is empty", () => {
-      const editor = atom.workspace.getActiveTextEditor();
       editor.setSelectedBufferRange([[0, 2], [0, 2]]);
       expect(editorHelper.getSelectedRange(editor)).toEqual(null);
     });
@@ -36,7 +38,6 @@ describe("EditorHelper", () => {
 
   describe("insertText", () => {
     beforeEach(function() {
-      editor = atom.workspace.getActiveTextEditor();
       editor.setText("pre-formatted text");
       editor.setCursorScreenPosition({ row: 0, column: 3 });
       text = "post";
@@ -61,10 +62,7 @@ describe("EditorHelper", () => {
   });
 
   describe("getTextInRange", () => {
-    beforeEach(function() {
-      editor = atom.workspace.getActiveTextEditor();
-      editor.setText("some text");
-    });
+    beforeEach(() => editor.setText("some text"));
 
     it("returns text in given range", () => {
       const range = [[0, 0], [0, 4]];
@@ -81,10 +79,7 @@ describe("EditorHelper", () => {
   });
 
   describe("indentText", () => {
-    beforeEach(function() {
-      editor = atom.workspace.getActiveTextEditor();
-      range = { start: { row: 0, column: 0 } };
-    });
+    beforeEach(() => (range = { start: { row: 0, column: 0 } }));
 
     describe("when softTabs is true", () => {
       it("adds spaces to match indention of first line of range", () => {

@@ -10,6 +10,8 @@ import process from "child_process";
 const validFile = path.join(__dirname, "fixtures", "valid.ex");
 
 describe("Formatter", () => {
+  let editor;
+
   beforeEach(() => {
     waitsForPromise(() =>
       atom.packages
@@ -17,6 +19,8 @@ describe("Formatter", () => {
         .then(() => atom.workspace.open(validFile))
         .then(() => atom.packages.activatePackage("atom-elixir-formatter"))
     );
+
+    runs(() => (editor = atom.workspace.getActiveTextEditor()));
 
     atom.packages.triggerDeferredActivationHooks();
   });
@@ -28,7 +32,6 @@ describe("Formatter", () => {
         stdout: "replacement text"
       });
 
-      const editor = atom.workspace.getActiveTextEditor();
       editor.setText("initial text");
       formatter.formatTextEditor(editor);
       expect(editor.getText()).toEqual("replacement text");
@@ -41,7 +44,6 @@ describe("Formatter", () => {
         stdout: "REPLACEMENT TEXT\n"
       });
 
-      const editor = atom.workspace.getActiveTextEditor();
       editor.setText("Row1\nRow2\nRow3");
       editor.setSelectedBufferRange([[1, 0], [2, 0]]); // select 2nd row
       formatter.formatTextEditor(editor, editor.getSelectedBufferRange());
@@ -55,7 +57,7 @@ describe("Formatter", () => {
         stderr: "stderr msg"
       });
 
-      formatter.formatTextEditor(atom.workspace.getActiveTextEditor());
+      formatter.formatTextEditor(editor);
       specHelper.verifyNotification("Elixir Formatter Error", {
         type: "error",
         detail: "stderr msg"
@@ -64,7 +66,7 @@ describe("Formatter", () => {
 
     it("displays error notification when an exception is thrown", () => {
       spyOn(formatter, "runFormat").andThrow("exception msg");
-      formatter.formatTextEditor(atom.workspace.getActiveTextEditor());
+      formatter.formatTextEditor(editor);
       specHelper.verifyNotification("Elixir Formatter Exception", {
         type: "error",
         detail: "exception msg"
