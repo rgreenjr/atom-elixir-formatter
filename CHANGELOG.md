@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.6 - 2018-01-02
+
+* Cleanup spec tests in preparation for 1.0 release
+
 ## 0.4.5 - 2017-12-10
 
 * Correctly assign cwd when project contains multiple project folders
