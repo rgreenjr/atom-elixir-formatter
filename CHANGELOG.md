@@ -3,6 +3,7 @@
 ## 1.0.0 - 2018-01-17
 
 * Release 1.0 to coincide with release of formatter in Elixir 1.6.0
+* Remove instructions for downloading and compiling Elixir from README
 
 ## 0.4.6 - 2018-01-02
 
