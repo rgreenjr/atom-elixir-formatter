@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0 - 2018-01-17
+
+* Release 1.0 to coincide with release of formatter in Elixir 1.6.0
+
 ## 0.4.6 - 2018-01-02
 
 * Cleanup spec tests in preparation for 1.0 release
