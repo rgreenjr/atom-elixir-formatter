@@ -108,4 +108,21 @@ describe("EditorHelper", () => {
       });
     });
   });
+
+  describe("shouldFormatTextEditor", () => {
+    it("returns false when editor's grammar is not Elixir", () => {
+      editor.setGrammar(atom.grammars.nullGrammar);
+      expect(editorHelper.shouldFormatTextEditor(editor)).toEqual(false);
+    });
+
+    it("returns false when formatOnSave is never", () => {
+      atom.config.set("atom-elixir-formatter.formatOnSave", "never");
+      expect(editorHelper.shouldFormatTextEditor(editor)).toEqual(false);
+    });
+
+    it("returns false when package is disabled", () => {
+      atom.packages.disablePackage("atom-elixir-formatter");
+      expect(editorHelper.shouldFormatTextEditor(editor)).toEqual(false);
+    });
+  });
 });
