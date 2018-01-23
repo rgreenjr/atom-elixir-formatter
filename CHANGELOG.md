@@ -2,7 +2,7 @@
 
 ## 1.0.1 - 2018-01-22
 
-* Handle null editor root path when checking for .formatter.exs
+* Handle null editor root path when checking for .formatter.exs (@randycoulman)
 * Add link to mix format task documentation in README
 
 ## 1.0.0 - 2018-01-17
