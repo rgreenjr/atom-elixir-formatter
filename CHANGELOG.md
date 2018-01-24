@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.2 - 2018-01-24
+
+* Ensure package has not been disabled before formatting code (@randycoulman)
+
 ## 1.0.1 - 2018-01-22
 
 * Handle null editor root path when checking for .formatter.exs (@randycoulman)
