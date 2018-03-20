@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.3 - 2018-03-20
+
+* Use --check-equivalent to verify AST is unchanged by formatter (@ideaMarcos)
+
 ## 1.0.2 - 2018-01-24
 
 * Ensure package has not been disabled before formatting code (@randycoulman)
