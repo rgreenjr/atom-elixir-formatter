@@ -108,10 +108,14 @@ describe("Formatter", () => {
     it("calls mix directly when elixirExecutable has default value", () => {
       formatter.runFormat("input text");
 
-      expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
-        input: "input text",
-        cwd: main.getActiveTextEditorRootPath()
-      });
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix",
+        ["format", "--check-equivalent", "-"],
+        {
+          input: "input text",
+          cwd: main.getActiveTextEditorRootPath()
+        }
+      );
     });
 
     it("uses elixirExecutable setting when defined", () => {
@@ -123,7 +127,7 @@ describe("Formatter", () => {
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
-        ["/path/to/mix", "format", "-"],
+        ["/path/to/mix", "format", "--check-equivalent", "-"],
         { input: "input text", cwd: main.getActiveTextEditorRootPath() }
       );
     });
@@ -132,9 +136,13 @@ describe("Formatter", () => {
       spyOn(main, "getActiveTextEditorRootPath").andReturn(null);
       formatter.runFormat("input text");
 
-      expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
-        input: "input text"
-      });
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix",
+        ["format", "--check-equivalent", "-"],
+        {
+          input: "input text"
+        }
+      );
     });
   });
 
@@ -144,11 +152,15 @@ describe("Formatter", () => {
       spyOn(main, "isWindowsPlatform").andReturn(true);
       formatter.runFormat("input text");
 
-      expect(process.spawnSync).toHaveBeenCalledWith("mix", ["format", "-"], {
-        input: "input text",
-        shell: true,
-        cwd: main.getActiveTextEditorRootPath()
-      });
+      expect(process.spawnSync).toHaveBeenCalledWith(
+        "mix",
+        ["format", "--check-equivalent", "-"],
+        {
+          input: "input text",
+          shell: true,
+          cwd: main.getActiveTextEditorRootPath()
+        }
+      );
     });
   });
 });
