@@ -37,7 +37,7 @@
 
 ## 0.4.2 - 2017-11-29
 
-* Dismiss outstanding notification on format success
+* Dismiss outstanding notification on format success (@thiagogsr)
 
 ## 0.4.1 - 2017-11-29
 
