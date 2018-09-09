@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5 - 2018-09-09
+
+- Add missing import (@melbardis)
+
 ## 1.0.4 - 2018-09-09
 
 - Set CWD to nearest .formatter.exs to allow subdirs to have their own rules
