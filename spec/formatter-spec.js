@@ -112,8 +112,7 @@ describe("Formatter", () => {
         "mix",
         ["format", "--check-equivalent", "-"],
         {
-          input: "input text",
-          cwd: main.getActiveTextEditorRootPath()
+          input: "input text"
         }
       );
     });
@@ -128,7 +127,7 @@ describe("Formatter", () => {
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
         ["/path/to/mix", "format", "--check-equivalent", "-"],
-        { input: "input text", cwd: main.getActiveTextEditorRootPath() }
+        { input: "input text" }
       );
     });
 
@@ -157,8 +156,7 @@ describe("Formatter", () => {
         ["format", "--check-equivalent", "-"],
         {
           input: "input text",
-          shell: true,
-          cwd: main.getActiveTextEditorRootPath()
+          shell: true
         }
       );
     });
