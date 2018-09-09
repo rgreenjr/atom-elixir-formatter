@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.4 - 2018-09-09
+
+- Set CWD to nearest .formatter.exs to allow subdirs to have their own rules
+
 ## 1.0.3 - 2018-03-20
 
 - Use --check-equivalent to verify AST is unchanged by formatter (@ideaMarcos)
