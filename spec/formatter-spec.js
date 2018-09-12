@@ -106,13 +106,14 @@ describe("Formatter", () => {
     });
 
     it("calls mix directly when elixirExecutable has default value", () => {
-      formatter.runFormat("input text");
+      formatter.runFormat("input text", editor);
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
         ["format", "--check-equivalent", "-"],
         {
-          input: "input text"
+          input: "input text",
+          cwd: path.dirname(validFile)
         }
       );
     });
@@ -122,18 +123,21 @@ describe("Formatter", () => {
         "atom-elixir-formatter.elixirExecutable",
         "/path/to/elixir"
       );
-      formatter.runFormat("input text");
+      formatter.runFormat("input text", editor);
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
         ["/path/to/mix", "format", "--check-equivalent", "-"],
-        { input: "input text" }
+        {
+          input: "input text",
+          cwd: path.dirname(validFile)
+        }
       );
     });
 
     it("doesn't set cwd when editor's root path is null", () => {
       spyOn(main, "getActiveTextEditorRootPath").andReturn(null);
-      formatter.runFormat("input text");
+      formatter.runFormat("input text", editor);
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
@@ -149,13 +153,14 @@ describe("Formatter", () => {
     it("enables shell option when platform is Windows", () => {
       spyOn(process, "spawnSync").andReturn({});
       spyOn(main, "isWindowsPlatform").andReturn(true);
-      formatter.runFormat("input text");
+      formatter.runFormat("input text", editor);
 
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
         ["format", "--check-equivalent", "-"],
         {
           input: "input text",
+          cwd: path.dirname(validFile),
           shell: true
         }
       );
