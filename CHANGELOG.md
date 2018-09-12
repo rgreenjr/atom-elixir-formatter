@@ -3,6 +3,7 @@
 ## 1.0.6 - 2018-09-11
 
 - Ensure project path exists when setting CWD
+- Clarify config description (@novaugust)
 
 ## 1.0.5 - 2018-09-09
 
