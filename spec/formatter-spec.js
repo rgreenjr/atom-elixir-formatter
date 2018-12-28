@@ -26,28 +26,11 @@ describe("Formatter", () => {
   });
 
   describe("formatTextEditor", () => {
-    it("formats all text when range parameter not given", () => {
-      spyOn(formatter, "runFormat").andReturn({
-        status: 0,
-        stdout: "replacement text"
-      });
-
-      editor.setText("initial text");
+    it("formats entire file", () => {
+      spyOn(formatter, "runFormat").andReturn({ status: 0 });
       formatter.formatTextEditor(editor);
-      expect(editor.getText()).toEqual("replacement text");
-      expect(atom.notifications.getNotifications().length).toBe(0);
-    });
-
-    it("formats specified text range when range parameter given", () => {
-      spyOn(formatter, "runFormat").andReturn({
-        status: 0,
-        stdout: "REPLACEMENT TEXT\n"
-      });
-
-      editor.setText("Row1\nRow2\nRow3");
-      editor.setSelectedBufferRange([[1, 0], [2, 0]]); // select 2nd row
-      formatter.formatTextEditor(editor, editor.getSelectedBufferRange());
-      expect(editor.getText()).toEqual("Row1\nREPLACEMENT TEXT\nRow3");
+      str = "defmodule App do\n  def function_name do\n    1 + 1\n  end\nend\n";
+      expect(editor.getText()).toEqual(str);
       expect(atom.notifications.getNotifications().length).toBe(0);
     });
 
@@ -106,15 +89,11 @@ describe("Formatter", () => {
     });
 
     it("calls mix directly when elixirExecutable has default value", () => {
-      formatter.runFormat("input text", editor);
-
+      formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
-        ["format", "--check-equivalent", "-"],
-        {
-          input: "input text",
-          cwd: path.dirname(validFile)
-        }
+        ["format", "--check-equivalent", editor.getPath()],
+        { cwd: path.dirname(validFile) }
       );
     });
 
@@ -123,28 +102,21 @@ describe("Formatter", () => {
         "atom-elixir-formatter.elixirExecutable",
         "/path/to/elixir"
       );
-      formatter.runFormat("input text", editor);
-
+      formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
-        ["/path/to/mix", "format", "--check-equivalent", "-"],
-        {
-          input: "input text",
-          cwd: path.dirname(validFile)
-        }
+        ["/path/to/mix", "format", "--check-equivalent", editor.getPath()],
+        { cwd: path.dirname(validFile) }
       );
     });
 
     it("doesn't set cwd when editor's root path is null", () => {
       spyOn(main, "getActiveTextEditorRootPath").andReturn(null);
-      formatter.runFormat("input text", editor);
-
+      formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
-        ["format", "--check-equivalent", "-"],
-        {
-          input: "input text"
-        }
+        ["format", "--check-equivalent", editor.getPath()],
+        {}
       );
     });
   });
@@ -153,13 +125,11 @@ describe("Formatter", () => {
     it("enables shell option when platform is Windows", () => {
       spyOn(process, "spawnSync").andReturn({});
       spyOn(main, "isWindowsPlatform").andReturn(true);
-      formatter.runFormat("input text", editor);
-
+      formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
-        ["format", "--check-equivalent", "-"],
+        ["format", "--check-equivalent", editor.getPath()],
         {
-          input: "input text",
           cwd: path.dirname(validFile),
           shell: true
         }
