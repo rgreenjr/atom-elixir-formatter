@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.0.0 - 2020-02-04
+
+- Format files on file system instead of in memory
+- Set CWD to project root and specify nearest .formatter.exs via --dot-formatter
+
 ## 1.0.6 - 2018-09-11
 
 - Ensure project path exists when setting CWD
