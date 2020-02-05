@@ -29,7 +29,7 @@ apm install atom-elixir-formatter
 Elixir files are formatted automatically on save. This can be disabled in
 **Settings**, or set to occur only when projects include a `.formatter.exs` file. See the `mix format` [task documentation](https://hexdocs.pm/mix/Mix.Tasks.Format.html#module-formatter-exs) for a list of formatter configuration options supported in `.formatter.exs`.
 
-You can manually format sections of code using the keyboard shortcut
+You can manually format a file using the keyboard shortcut
 <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>F</kbd>.
 
 By default, Atom Elixir Formatter uses the `elixir` executable resolved on `$PATH`. You can override this behavior by going to **Settings** ⟶ **Packages** ⟶ **Atom Elixir Formatter** and setting **Elixir Executable** to the absolute path of an `elixir` executable.
