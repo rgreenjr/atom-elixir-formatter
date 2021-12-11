@@ -92,7 +92,7 @@ describe("Formatter", () => {
       formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
-        ["format", "--check-equivalent", editor.getPath()],
+        ["format", editor.getPath()],
         { cwd: path.dirname(validFile) }
       );
     });
@@ -105,7 +105,7 @@ describe("Formatter", () => {
       formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "/path/to/elixir",
-        ["/path/to/mix", "format", "--check-equivalent", editor.getPath()],
+        ["/path/to/mix", "format", editor.getPath()],
         { cwd: path.dirname(validFile) }
       );
     });
@@ -115,7 +115,7 @@ describe("Formatter", () => {
       formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
-        ["format", "--check-equivalent", editor.getPath()],
+        ["format", editor.getPath()],
         {}
       );
     });
@@ -128,7 +128,7 @@ describe("Formatter", () => {
       formatter.runFormat(editor);
       expect(process.spawnSync).toHaveBeenCalledWith(
         "mix",
-        ["format", "--check-equivalent", editor.getPath()],
+        ["format", editor.getPath()],
         {
           cwd: path.dirname(validFile),
           shell: true

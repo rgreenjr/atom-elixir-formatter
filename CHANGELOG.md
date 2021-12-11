@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1 - 2021-12-11
+
+- Remove use of deprecated --check-equivalent
+
 ## 2.0.0 - 2020-02-04
 
 - Format files on file system instead of in memory
