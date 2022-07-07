@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.0.2 - 2022-06-07
+## 2.1.0 - 2022-07-07
 
 - Add support for .heex files (@benonymus)
 
