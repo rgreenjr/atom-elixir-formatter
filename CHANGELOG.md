@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.2 - 2022-06-07
+
+- Add support for .heex files (@benonymus)
+
 ## 2.0.1 - 2021-12-11
 
 - Remove use of deprecated --check-equivalent
