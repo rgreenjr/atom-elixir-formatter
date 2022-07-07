@@ -1,5 +1,5 @@
 {
-  "name": "v2.1.1",
+  "name": "atom-elixir-formatter",
   "main": "./lib/main",
   "version": "2.1.6",
   "description": "Elixir source code formatter for the Atom editor.",
