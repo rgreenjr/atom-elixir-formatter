@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.2.0 - 2022-07-18
+
+- Revert support for .heex files until synyax issue is resolved
+
 ## 2.1.0 - 2022-07-07
 
 - Add support for .heex files (@benonymus)
